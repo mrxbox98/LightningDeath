@@ -4,6 +4,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+
 public class LightningDeathPlugin extends JavaPlugin {
 
     /**
@@ -24,7 +26,7 @@ public class LightningDeathPlugin extends JavaPlugin {
     /**
      * Types of entities the lightning should be summoned on
      */
-    public static EntityType[] types = {EntityType.PLAYER};
+    public static ArrayList<EntityType> types = new ArrayList<EntityType>();
 
     /**
      * Called when the plugin is enabled
@@ -37,12 +39,18 @@ public class LightningDeathPlugin extends JavaPlugin {
         instance=this;
 
 
-        getConfig().addDefault("Types",types);
+        getConfig().addDefault("Types","PLAYER");
 
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        types= (EntityType[]) getConfig().get("Types");
+        for(EntityType entityType: EntityType.values())
+        {
+            if(getConfig().getString("Types").contains(entityType.name()))
+            {
+                types.add(entityType);
+            }
+        }
 
         listener=new DeathListener();
         getServer().getPluginManager().registerEvents(listener,this);
