@@ -35,10 +35,7 @@ public class LightningDeathPlugin extends JavaPlugin {
     public void onEnable()
     {
         instance=this;
-
-        version[0]=Integer.parseInt(getServer().getVersion().split("_")[0]);
-        version[1]=Integer.parseInt(getServer().getVersion().split("_")[1]);
-        version[2]=Integer.parseInt(getServer().getVersion().split("_")[2]);
+        
 
         getConfig().addDefault("Types",types);
 
