@@ -42,6 +42,9 @@ public class LightningDeathPlugin extends JavaPlugin {
 
         getConfig().addDefault("Types",types);
 
+        getConfig().options().copyDefaults(true);
+        saveConfig();
+
         types= (EntityType[]) getConfig().get("Types");
 
         listener=new DeathListener();
