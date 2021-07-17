@@ -35,7 +35,7 @@ public class LightningDeathPlugin extends JavaPlugin {
     public void onEnable()
     {
         instance=this;
-        
+
 
         getConfig().addDefault("Types",types);
 
