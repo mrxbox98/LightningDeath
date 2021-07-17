@@ -1,6 +1,6 @@
 package me.mrxbox98.LightningDeath;
 
-import javafx.scene.layout.Priority;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
