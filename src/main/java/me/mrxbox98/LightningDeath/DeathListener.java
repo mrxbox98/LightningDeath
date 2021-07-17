@@ -21,7 +21,7 @@ public class DeathListener implements Listener {
         Bukkit.getScheduler().runTaskAsynchronously(LightningDeathPlugin.instance, new Runnable() {
             @Override
             public void run() {
-                if(LightningDeathPlugin.hasEntity(event.getEntity().getType()) && LightningDeathPlugin.hasEntity(event.getEntity().getKiller().getType()))
+                if(LightningDeathPlugin.hasEntity(event.getEntity().getType()) && LightningDeathPlugin.hasEntity(event.getEntity().getKiller().getType()) && (event.getEntity().getKiller().hasPermission("CauseLightning")))
                 {
                     LightningDeathPlugin.instance.getServer().getWorld(event.getEntity().getWorld().getUID()).strikeLightningEffect(event.getEntity().getLocation());
                 }

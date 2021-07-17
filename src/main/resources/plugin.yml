@@ -1,3 +1,8 @@
 name: LightningDeath
 version: 1.1
 main: me.mrxbox98.LightningDeath.LightningDeathPlugin
+
+permissions:
+  CauseLightning:
+    description: lets a player summon lightning whenever they kill an entity
+    default: true
