@@ -10,6 +10,11 @@ import org.bukkit.plugin.Plugin;
 
 public class DeathListener implements Listener {
 
+    /**
+     * Calls a lightning strike at the location and the world where
+     * the player died
+     * @param event The death event
+     */
     @EventHandler (priority = EventPriority.LOWEST)
     public void EntityDeathEvent(EntityDeathEvent event)
     {

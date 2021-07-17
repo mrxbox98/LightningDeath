@@ -5,12 +5,26 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class LightningDeathPlugin extends JavaPlugin {
 
+    /**
+     * The plugin instance to use in other classes
+     */
     public static LightningDeathPlugin instance;
 
+    /**
+     * The death event listener
+     */
     public static DeathListener listener;
 
+    /**
+     * The server version which might be used later
+     */
     public static int[] version = new int[3];
 
+    /**
+     * Called when the plugin is enabled
+     * Checks the servers version and registers
+     * the event listener
+     */
     @Override
     public void onEnable()
     {
@@ -24,6 +38,9 @@ public class LightningDeathPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(listener,this);
     }
 
+    /**
+     * Unregisters the linstener
+     */
     @Override
     public void onDisable()
     {
