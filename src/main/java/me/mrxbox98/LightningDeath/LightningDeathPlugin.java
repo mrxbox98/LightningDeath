@@ -57,4 +57,23 @@ public class LightningDeathPlugin extends JavaPlugin {
         HandlerList.unregisterAll(listener);
     }
 
+
+    /**
+     * Checks whether the entity provided
+     * is in the array of allowed entities
+     * @param type The type to check
+     * @return true if it is the right type false otherwise
+     */
+    public static boolean hasEntity(EntityType type)
+    {
+        for(EntityType entityType: types)
+        {
+            if(type.equals(entityType))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
