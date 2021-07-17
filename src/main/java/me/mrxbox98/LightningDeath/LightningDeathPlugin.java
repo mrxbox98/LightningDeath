@@ -1,5 +1,6 @@
 package me.mrxbox98.LightningDeath;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +22,11 @@ public class LightningDeathPlugin extends JavaPlugin {
     public static int[] version = new int[3];
 
     /**
+     * Types of entities the lightning should be summoned on
+     */
+    public static EntityType[] types = {EntityType.PLAYER};
+
+    /**
      * Called when the plugin is enabled
      * Checks the servers version and registers
      * the event listener
@@ -34,12 +40,16 @@ public class LightningDeathPlugin extends JavaPlugin {
         version[1]=Integer.parseInt(getServer().getVersion().split("_")[1]);
         version[2]=Integer.parseInt(getServer().getVersion().split("_")[2]);
 
+        getConfig().addDefault("Types",types);
+
+        types= (EntityType[]) getConfig().get("Types");
+
         listener=new DeathListener();
         getServer().getPluginManager().registerEvents(listener,this);
     }
 
     /**
-     * Unregisters the linstener
+     * Unregisters the listener
      */
     @Override
     public void onDisable()
