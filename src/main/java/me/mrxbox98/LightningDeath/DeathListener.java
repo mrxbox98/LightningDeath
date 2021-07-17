@@ -1,6 +1,7 @@
 package me.mrxbox98.LightningDeath;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -12,10 +13,17 @@ public class DeathListener implements Listener {
     @EventHandler (priority = EventPriority.LOWEST)
     public void EntityDeathEvent(EntityDeathEvent event)
     {
-        if(event.getEntity() instanceof Plugin)
-        {
-            LightningDeathPlugin.instance.getServer().getWorld(event.getEntity().getWorld().getUID()).strikeLightningEffect(event.getEntity().getLocation());
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(LightningDeathPlugin.instance, new Runnable() {
+            @Override
+            public void run() {
+                if(event.getEntity() instanceof Plugin)
+                {
+                    LightningDeathPlugin.instance.getServer().getWorld(event.getEntity().getWorld().getUID()).strikeLightningEffect(event.getEntity().getLocation());
+                }
+            }
+        });
+
+
     }
 
 }
