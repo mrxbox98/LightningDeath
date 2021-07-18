@@ -5,28 +5,19 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LightningDeathPlugin extends JavaPlugin {
-
-    /**
-     * The plugin instance to use in other classes
-     */
-    public static LightningDeathPlugin instance;
-
     /**
      * The death event listener
      */
     public static DeathListener listener;
 
     /**
-     * The server version which might be used later
+     * Types of entities the lightning are allowed to be summoned on
      */
-    public static int[] version = new int[3];
-
-    /**
-     * Types of entities the lightning should be summoned on
-     */
-    public static ArrayList<EntityType> types = new ArrayList<EntityType>();
+    public static List<EntityType> allowedEntities = new ArrayList<>();
 
     /**
      * Called when the plugin is enabled
@@ -34,37 +25,25 @@ public class LightningDeathPlugin extends JavaPlugin {
      * the event listener
      */
     @Override
-    public void onEnable()
-    {
-        instance=this;
-
-
+    public void onEnable() {
         getConfig().addDefault("Types","PLAYER");
-
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        for(EntityType entityType: EntityType.values())
-        {
+        // add config entity types to allowed entities list
+        for(EntityType entityType : EntityType.values())
             if(getConfig().getString("Types").contains(entityType.name()))
-            {
-                types.add(entityType);
-            }
-        }
+                allowedEntities.add(entityType);
 
-        listener=new DeathListener();
-        getServer().getPluginManager().registerEvents(listener,this);
+        // listener is registered inside of the class
+        listener = new DeathListener(this);
     }
 
-    /**
-     * Unregisters the listener
-     */
+
     @Override
-    public void onDisable()
-    {
-        HandlerList.unregisterAll(listener);
+    public void onDisable() {
+        super.onDisable();
     }
-
 
     /**
      * Checks whether the entity provided
@@ -72,16 +51,8 @@ public class LightningDeathPlugin extends JavaPlugin {
      * @param type The type to check
      * @return true if it is the right type false otherwise
      */
-    public static boolean hasEntity(EntityType type)
-    {
-        for(EntityType entityType: types)
-        {
-            if(type.equals(entityType))
-            {
-                return true;
-            }
-        }
-        return false;
+    public static boolean isEntityAllowed(EntityType type) {
+        // checks the entire "allowedEntities" list to see if EntityType "type" is anywhere in the list
+        return allowedEntities.stream().anyMatch(entityType -> entityType.equals(type));
     }
-
 }

@@ -6,28 +6,28 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.plugin.Plugin;
 
 public class DeathListener implements Listener {
+    public Plugin plugin;
+    static LightningDeathTask lightningDeathTask;
+
+    public DeathListener(Plugin plugin) {
+        this.plugin = plugin;
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);    // register listener
+    }
 
     /**
      * Calls a lightning strike at the location and the world where
      * the player died
      * @param event The death event
      */
-    @EventHandler (priority = EventPriority.LOWEST)
-    public void EntityDeathEvent(EntityDeathEvent event)
-    {
-        Bukkit.getScheduler().runTaskAsynchronously(LightningDeathPlugin.instance, new Runnable() {
-            @Override
-            public void run() {
-                if(LightningDeathPlugin.hasEntity(event.getEntity().getType()) && LightningDeathPlugin.hasEntity(event.getEntity().getKiller().getType()) && (event.getEntity().getKiller().hasPermission("CauseLightning")))
-                {
-                    LightningDeathPlugin.instance.getServer().getWorld(event.getEntity().getWorld().getUID()).strikeLightningEffect(event.getEntity().getLocation());
-                }
-            }
-        });
-
-
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent event) {
+        // creates a new "task" to be ran later
+        lightningDeathTask = new LightningDeathTask(event);
+        // runs the task
+        // (striking lightning without async has no performance impact...)
+        lightningDeathTask.runTask(plugin);
     }
-
 }
