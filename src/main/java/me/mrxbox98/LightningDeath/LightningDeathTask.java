@@ -34,7 +34,8 @@ public class LightningDeathTask extends BukkitRunnable {
 
         if (killer == null)
         {
-            LightningDeathPlugin.instance.getLogger().info(entity.getName() + " died but no lightning was struck as the kill was self inflicted.");
+            if(LightningDeathPlugin.debug)
+                LightningDeathPlugin.instance.getLogger().info(entity.getName() + " died but no lightning was struck as the kill was self inflicted.");
             return;
         }// entity death was self-inflicted (ex. fall damage)
 
@@ -44,13 +45,13 @@ public class LightningDeathTask extends BukkitRunnable {
             {
                 world.strikeLightningEffect(entity.getLocation());
             }
-            else
+            else if(LightningDeathPlugin.debug)
             {
                 LightningDeathPlugin.instance.getLogger().info(entity.getName() + " was killed but no lightning was struck because " + killer.getName() + " does not have the CauseLightning permission.");
             }
 
         }// killed entity type is in the "allowed types" list
-        else
+        else if(LightningDeathPlugin.debug)
         {
             LightningDeathPlugin.instance.getLogger().info("A " + entity.getType().name() + " but no lightning was struck as this mob is not in the allowed mobs list in the config.yml");
         }
