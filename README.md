@@ -1,3 +1,4 @@
 # LightningDeath
  
-![image](https://user-images.githubusercontent.com/29240392/126050918-984147d0-ad5b-4f4d-8254-516fee5bccce.png)
+![LightNing Death](https://user-images.githubusercontent.com/29240392/126053557-3cbe2a9a-a535-4a81-a929-f84ac90df6e3.png)
+
