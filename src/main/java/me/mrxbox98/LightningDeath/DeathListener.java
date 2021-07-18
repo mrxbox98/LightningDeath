@@ -1,7 +1,7 @@
 package me.mrxbox98.LightningDeath;
 
-
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.plugin.Plugin;
@@ -19,7 +19,7 @@ public class DeathListener implements Listener {
      * the player died
      * @param event The death event
      */
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onEntityDeath(EntityDeathEvent event) {
         // creates a new "task" to be ran later
         new LightningDeathTask(event).runTask(plugin);

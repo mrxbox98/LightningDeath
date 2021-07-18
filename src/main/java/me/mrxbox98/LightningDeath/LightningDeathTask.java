@@ -6,12 +6,24 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class LightningDeathTask extends BukkitRunnable {
+
+    /**
+     * The Death event to use
+     */
     final EntityDeathEvent event;
 
+    /**
+     * Creates a new lightning task
+     * @param event the event to use
+     */
     public LightningDeathTask(EntityDeathEvent event) {
         this.event = event;
     }
 
+    /**
+     * Strikes the lightning effect at the
+     * dead entities location
+     */
     private void strikeLightningAtEntity() {
 
         // get the entity, killer, and world
@@ -27,6 +39,9 @@ public class LightningDeathTask extends BukkitRunnable {
                     world.strikeLightningEffect(entity.getLocation());
     }
 
+    /**
+     * Ran as a runnable
+     */
     @Override
     public void run() {
        strikeLightningAtEntity();
