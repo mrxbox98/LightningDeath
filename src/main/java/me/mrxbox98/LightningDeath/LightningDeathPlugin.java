@@ -18,13 +18,26 @@ public class LightningDeathPlugin extends JavaPlugin {
     public static List<EntityType> allowedEntities = new ArrayList<>();
 
     /**
+     * Whether debug mode is enabled
+     */
+    public static boolean debug;
+
+    /**
+     * The plugin's instance
+     */
+    public static JavaPlugin instance;
+
+    /**
      * Called when the plugin is enabled
      * Checks the servers version and registers
      * the event listener
      */
     @Override
     public void onEnable() {
+        instance=this;
+
         getConfig().addDefault("Types","PLAYER");
+        getConfig().addDefault("Debug",false);
         getConfig().options().copyDefaults(true);
         saveConfig();
 
@@ -33,8 +46,19 @@ public class LightningDeathPlugin extends JavaPlugin {
             if(getConfig().getString("Types").contains(entityType.name()))
                 allowedEntities.add(entityType);
 
+        //Debug mode for plugin
+        debug=getConfig().getBoolean("Debug");
+
         // listener is registered inside of the class
         listener = new DeathListener(this);
+
+        //Only active in debug mode
+        if(debug)
+        {
+            getLogger().info("LightningDeath debug mode is enabled");
+            getLogger().info("Server Version: " + getServer().getVersion());
+        }
+
     }
 
 
