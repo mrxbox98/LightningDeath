@@ -9,6 +9,10 @@ import org.bukkit.plugin.Plugin;
 public class DeathListener implements Listener {
     public Plugin plugin;
 
+    /**
+     * Creates a new DeathListener
+     * @param plugin the LightningDeath plugin
+     */
     public DeathListener(Plugin plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);    // register listener
