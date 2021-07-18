@@ -13,8 +13,6 @@ public class LightningDeathTask extends BukkitRunnable {
     }
 
     private void strikeLightningAtEntity() {
-        // event passed to this runnable is null, do nothing
-        if (event == null) return;
 
         // get the entity, killer, and world
         LivingEntity entity = event.getEntity();
