@@ -32,7 +32,7 @@ public class LightningDeathTask extends BukkitRunnable {
         Player killer = entity.getKiller();
         World world = entity.getWorld();
 
-        if (killer == null)
+        if (killer == null && !LightningDeathPlugin.selfInflicted)
         {
             if(LightningDeathPlugin.debug)
                 LightningDeathPlugin.instance.getLogger().info(entity.getName() + " died but no lightning was struck as the kill was self inflicted.");
@@ -41,7 +41,7 @@ public class LightningDeathTask extends BukkitRunnable {
 
         if (LightningDeathPlugin.isEntityAllowed(entity.getType()))
         {
-            if (killer.hasPermission("CauseLightning"))
+            if (LightningDeathPlugin.selfInflicted || killer.hasPermission("CauseLightning"))
             {
                 world.strikeLightningEffect(entity.getLocation());
             }

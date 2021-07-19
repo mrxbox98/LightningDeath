@@ -23,6 +23,12 @@ public class LightningDeathPlugin extends JavaPlugin {
     public static boolean debug;
 
     /**
+     * If this is true lightning will strike on players when they die
+     * without a killer
+     */
+    public static boolean selfInflicted;
+
+    /**
      * The plugin's instance
      */
     public static JavaPlugin instance;
@@ -38,6 +44,7 @@ public class LightningDeathPlugin extends JavaPlugin {
 
         getConfig().addDefault("Types","PLAYER");
         getConfig().addDefault("Debug",false);
+        getConfig().addDefault("SelfInflicted",false);
         getConfig().options().copyDefaults(true);
         saveConfig();
 
@@ -48,6 +55,9 @@ public class LightningDeathPlugin extends JavaPlugin {
 
         //Debug mode for plugin
         debug=getConfig().getBoolean("Debug");
+
+        //SelfInflicted lightning
+        selfInflicted=getConfig().getBoolean("SelfInflicted");
 
         // listener is registered inside of the class
         listener = new DeathListener(this);
