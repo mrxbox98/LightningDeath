@@ -29,6 +29,11 @@ public class LightningDeathPlugin extends JavaPlugin {
     public static boolean selfInflicted;
 
     /**
+     * Amount of times lightning should strike
+     */
+    public static int strikes;
+
+    /**
      * The plugin's instance
      */
     public static JavaPlugin instance;
@@ -45,6 +50,7 @@ public class LightningDeathPlugin extends JavaPlugin {
         getConfig().addDefault("Types","PLAYER");
         getConfig().addDefault("Debug",false);
         getConfig().addDefault("SelfInflicted",false);
+        getConfig().addDefault("strikes",1);
         getConfig().options().copyDefaults(true);
         saveConfig();
 
@@ -58,6 +64,9 @@ public class LightningDeathPlugin extends JavaPlugin {
 
         //SelfInflicted lightning
         selfInflicted=getConfig().getBoolean("SelfInflicted");
+
+        //Amount of times lightning should strike
+        strikes=getConfig().getInt("strikes");
 
         // listener is registered inside of the class
         listener = new DeathListener(this);

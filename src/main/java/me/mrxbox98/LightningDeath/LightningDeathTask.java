@@ -43,7 +43,10 @@ public class LightningDeathTask extends BukkitRunnable {
         {
             if (LightningDeathPlugin.selfInflicted || killer.hasPermission("CauseLightning"))
             {
-                world.strikeLightningEffect(entity.getLocation());
+                for(int i=0;i<LightningDeathPlugin.strikes;i++)
+                {
+                    world.strikeLightningEffect(entity.getLocation());
+                }
             }
             else if(LightningDeathPlugin.debug)
             {
